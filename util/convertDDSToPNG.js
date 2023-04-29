@@ -58,13 +58,13 @@ const convert = (fl) => {
 
             setTimeout(() => {
                 // get the conversion status and try to save the file
-                fetchFileWithID(startConversionLink, res.data.data.id);
+                fetchFileWithID(startConversionLink, res.data.data.id, fixedFL);
             }, 3850);
         }
     });
 }
 
-const fetchFileWithID = (startConversionLink, id) => {
+const fetchFileWithID = (startConversionLink, id, fixedFL) => {
     axios.get(`${startConversionLink}/${id}/status`).then(rsp => {
         if(rsp.data.data.step_percent == 100){
             fetchFile(rsp.data.data.output.url, `public/files/extracted/${fixedFL.replace('dxt5/', 'dxt5.zip/').replace('.dds', '.png')}`);
